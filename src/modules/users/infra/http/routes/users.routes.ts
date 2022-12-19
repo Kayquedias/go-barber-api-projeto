@@ -15,3 +15,5 @@ export default usersRouter.post('/',
   }),
   usersController.create
 )
+
+usersRouter.get('/', usersController.list)

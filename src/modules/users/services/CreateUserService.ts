@@ -17,7 +17,6 @@ export class CreateUserService {
     const userEmail = await repository.findOne({
       where: { email }
     })
-    console.log({ userEmail })
 
     if (userEmail) {
       throw new Error("User already exists!")
