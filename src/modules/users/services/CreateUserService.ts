@@ -13,10 +13,7 @@ export class CreateUserService {
   private usersRepository: IUsersRepository = new UsersRepository()
 
   async execute({ name, email, password }: IRequest) {
-    const repository = getRepository(User)
-    const userEmail = await repository.findOne({
-      where: { email }
-    })
+    const userEmail = await this.usersRepository.findByEmail(email)
 
     if (userEmail) {
       throw new Error("User already exists!")

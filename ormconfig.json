@@ -9,7 +9,7 @@
     "database": "gobarberapi",
     "synchronize": true,
     "entities": [
-      "./src/modules/**/infra/typeorm/entities/*.ts"
+      "./src/modules/**/infra/typeorm/entities/*.{ts,js}"
     ],
     "migrations": [
       "./src/shared/infra/typeorm/migrations/*.ts"

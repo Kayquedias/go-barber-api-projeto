@@ -5,7 +5,7 @@
    "license": "MIT",
    "scripts": {
       "start": "ts-node-dev -r tsconfig-paths/register src/shared/infra/http/server.ts",
-      "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+      "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
    },
    "devDependencies": {
       "@types/express": "^4.17.14",
