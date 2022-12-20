@@ -1,6 +1,7 @@
+import { getRepository, Repository } from "typeorm";
+
 import { ICreateUserDTO } from "@modules/users/dtos/ICreateUserDTO";
 import { IUsersRepository } from "@modules/users/repositories/IUserRepository";
-import { EntityRepository, getRepository, Repository } from "typeorm";
 import { User } from "../entities/User";
 
 class UsersRepository implements IUsersRepository {
@@ -24,9 +25,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   async list(): Promise<User[]> {
-    const usersList = await this.ormRepository.find()
-
-    return usersList
+    return this.ormRepository.find()
   }
 }
 

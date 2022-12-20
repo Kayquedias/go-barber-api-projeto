@@ -1,5 +1,6 @@
 import { celebrate, Joi } from "celebrate";
 import { Router } from "express";
+
 import { UsersController } from "../controllers/userController";
 
 const usersRouter = Router()

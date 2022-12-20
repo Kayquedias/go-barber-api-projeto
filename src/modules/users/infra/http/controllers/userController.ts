@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express"
+
 import { CreateUserService } from '@modules/users/services/CreateUserService'
 import UsersRepository from "../../typeorm/repositories/UsersRepository"
 
