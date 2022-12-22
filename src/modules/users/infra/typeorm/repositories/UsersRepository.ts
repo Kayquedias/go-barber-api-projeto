@@ -11,7 +11,7 @@ class UsersRepository implements IUsersRepository {
      this.ormRepository = getRepository(User)
   }
 
-  async createUser(userData: ICreateUserDTO): Promise<User> {
+  async create(userData: ICreateUserDTO): Promise<User> {
     const user = this.ormRepository.create(userData)
     await getRepository(User).save(user)
     

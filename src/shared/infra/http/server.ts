@@ -11,6 +11,7 @@ const app = express()
 
 app.use(express.json())
 app.use(routes)
+import '@modules/users/repositories/fakes/FakeUsersRepository'
 
 app.use(errors())
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
