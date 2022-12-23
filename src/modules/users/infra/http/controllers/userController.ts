@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from 'express'
 
 import { CreateUserService } from '@modules/users/services/CreateUserService'
 import UsersRepository from '../../typeorm/repositories/UsersRepository'
+import HashProvider from '@modules/users/providers/implementations/BCryptHashProvider'
+import { IUsersRepository } from '@modules/users/repositories/IUsersRepository'
+import { IHashProvider } from '@modules/users/providers/models/IHashProvider'
 
 export class UsersController {
   async create(

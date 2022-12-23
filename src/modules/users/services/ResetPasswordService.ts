@@ -2,7 +2,7 @@ import { addHours, isAfter } from 'date-fns'
 
 import AppError from '@shared/infra/errors/AppError'
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
-import IUsersRepository from '../repositories/IUsersRepository'
+import { IUsersRepository } from '../repositories/IUsersRepository'
 import { IUsersTokensRepository } from '../repositories/IUsersTokenRepository'
 import UsersTokensRepository from '../infra/typeorm/repositories/UsersTokensRepository'
 

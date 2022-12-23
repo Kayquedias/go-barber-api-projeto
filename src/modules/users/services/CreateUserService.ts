@@ -1,6 +1,8 @@
 import { User } from '../infra/typeorm/entities/User'
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
-import IUsersRepository from '../repositories/IUsersRepository'
+import HashProvider from '../providers/implementations/BCryptHashProvider'
+import { IHashProvider } from '../providers/models/IHashProvider'
+import { IUsersRepository } from '../repositories/IUsersRepository'
 
 interface IRequest {
   name: string
@@ -9,7 +11,10 @@ interface IRequest {
 }
 
 export class CreateUserService {
-  private usersRepository: IUsersRepository = new UsersRepository()
+  constructor(
+    private usersRepository: IUsersRepository = new UsersRepository(),
+    private hashProvider: IHashProvider = new HashProvider()
+  ) {}
 
   async execute({ name, email, password }: IRequest): Promise<User> {
     const userEmail = await this.usersRepository.findByEmail(email)
@@ -18,10 +23,12 @@ export class CreateUserService {
       throw new Error('User already exists!')
     }
 
-    const user = this.usersRepository.create({
+    const hashedPassword = await this.hashProvider.generateHash(password)
+
+    const user = await this.usersRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     })
 
     return user

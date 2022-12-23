@@ -1,52 +1,42 @@
-import { uuid } from 'uuidv4'
+import { randomUUID } from 'crypto'
 
 import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
+import { IUsersRepository } from '../IUsersRepository'
 import { User } from '@modules/users/infra/typeorm/entities/User'
-import IUsersRepository from '../IUsersRepository'
 
-class FakeUsersRepository implements IUsersRepository {
+export class FakeUsersRepository implements IUsersRepository {
   private users: User[] = []
 
-  public async findById(id: string): Promise<User | undefined> {
-    const findUser = this.users.find(user => user.id)
-    return findUser
-  }
-
-  public async findByEmail(email: string): Promise<User | undefined> {
-    const findUser = this.users.find(user => user.email === email)
-
-    return findUser
-  }
-
-  public async create(userData: ICreateUserDTO): Promise<User> {
+  async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User()
 
-    Object.assign(user, { id: uuid() }, userData)
-
+    Object.assign(user, { id: randomUUID() }, userData)
     this.users.push(user)
 
     return user
   }
 
-  public async save(user: User): Promise<User> {
+  async findByEmail(email: string): Promise<User | undefined> {
+    const userEmail = this.users.find(user => user.email === email)
+
+    return userEmail
+  }
+
+  async findById(id: string): Promise<User | undefined> {
+    const findUser = this.users.find(user => user.id === id)
+
+    return findUser
+  }
+
+  async list(): Promise<User[]> {
+    return this.users
+  }
+
+  async save(user: User): Promise<User> {
     const findIndex = this.users.findIndex(findUser => findUser.id === user.id)
 
     this.users[findIndex] = user
 
     return user
   }
-
-  public async list(): Promise<User[]> {
-    return this.users
-  }
 }
-
-const fakeUsersRepository = new FakeUsersRepository()
-
-console.log(
-  fakeUsersRepository.create({
-    name: 'teste',
-    email: 'teset@gmail.com',
-    password: '123123',
-  })
-)
