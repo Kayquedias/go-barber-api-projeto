@@ -1,12 +1,12 @@
-import { User } from "../infra/typeorm/entities/User";
-import UsersRepository from "../infra/typeorm/repositories/UsersRepository";
-import { IUsersRepository } from "../repositories/IUserRepository";
+import { User } from '../infra/typeorm/entities/User'
+import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
+import IUsersRepository from '../repositories/IUsersRepository'
 
 interface IRequest {
-  name: string;
-  email: string;
-  password: string;
-} 
+  name: string
+  email: string
+  password: string
+}
 
 export class CreateUserService {
   private usersRepository: IUsersRepository = new UsersRepository()
@@ -15,15 +15,15 @@ export class CreateUserService {
     const userEmail = await this.usersRepository.findByEmail(email)
 
     if (userEmail) {
-      throw new Error("User already exists!")
+      throw new Error('User already exists!')
     }
 
     const user = this.usersRepository.create({
-      name, 
+      name,
       email,
-      password
+      password,
     })
 
-    return user;
+    return user
   }
 }

@@ -1,31 +1,52 @@
 import { uuid } from 'uuidv4'
 
-import { ICreateUserDTO } from "@modules/users/dtos/ICreateUserDTO";
-import { User } from "@modules/users/infra/typeorm/entities/User";
-import { IUsersRepository } from "../IUserRepository";
+import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
+import { User } from '@modules/users/infra/typeorm/entities/User'
+import IUsersRepository from '../IUsersRepository'
 
-class FakeUsersRepository implements IUsersRepository{
+class FakeUsersRepository implements IUsersRepository {
   private users: User[] = []
- 
-  async create(userData: ICreateUserDTO): Promise<User> {
+
+  public async findById(id: string): Promise<User | undefined> {
+    const findUser = this.users.find(user => user.id)
+    return findUser
+  }
+
+  public async findByEmail(email: string): Promise<User | undefined> {
+    const findUser = this.users.find(user => user.email === email)
+
+    return findUser
+  }
+
+  public async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User()
 
     Object.assign(user, { id: uuid() }, userData)
+
     this.users.push(user)
 
     return user
-  } 
-
-  findByEmail(email: string): Promise<User | undefined> {
-    throw new Error("Method not implemented.");
   }
 
-  list(): Promise<User[]> {
-    throw new Error("Method not implemented.");
+  public async save(user: User): Promise<User> {
+    const findIndex = this.users.findIndex(findUser => findUser.id === user.id)
+
+    this.users[findIndex] = user
+
+    return user
+  }
+
+  public async list(): Promise<User[]> {
+    return this.users
   }
 }
 
 const fakeUsersRepository = new FakeUsersRepository()
 
-console.log(fakeUsersRepository.create({name: 'teste', email: 'teset@gmail.com', password: '123123'})
+console.log(
+  fakeUsersRepository.create({
+    name: 'teste',
+    email: 'teset@gmail.com',
+    password: '123123',
+  })
 )
