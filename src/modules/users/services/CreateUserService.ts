@@ -1,7 +1,7 @@
 import { User } from '../infra/typeorm/entities/User'
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
-import HashProvider from '../providers/implementations/BCryptHashProvider'
-import { IHashProvider } from '../providers/models/IHashProvider'
+import HashProvider from '../providers/HashProvider/implementations/BCryptHashProvider'
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
 interface IRequest {

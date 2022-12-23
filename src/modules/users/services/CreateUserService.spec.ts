@@ -1,14 +1,18 @@
+import HashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider'
 import { FakeUsersRepository } from '../repositories/fakes/FakeUsersRepository'
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 import { CreateUserService } from './CreateUserService'
 
 let fakeUsersRepository: IUsersRepository
+let fakeHashProvider: IHashProvider
 let createUser: CreateUserService
 
 describe('Create user', () => {
   beforeAll(() => {
     fakeUsersRepository = new FakeUsersRepository()
-    createUser = new CreateUserService(fakeUsersRepository)
+    fakeHashProvider = new HashProvider()
+    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider)
   })
 
   it('should be able to create a new user', async () => {
