@@ -1,3 +1,4 @@
+import AppError from '@shared/infra/errors/AppError'
 import { User } from '../infra/typeorm/entities/User'
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
 import HashProvider from '../providers/HashProvider/implementations/BCryptHashProvider'
@@ -20,7 +21,7 @@ export class CreateUserService {
     const userEmail = await this.usersRepository.findByEmail(email)
 
     if (userEmail) {
-      throw new Error('User already exists!')
+      throw new AppError('User already exists!')
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password)

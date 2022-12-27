@@ -1,3 +1,4 @@
+import AppError from '@shared/infra/errors/AppError'
 import HashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider'
 import { FakeUsersRepository } from '../repositories/fakes/FakeUsersRepository'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
@@ -26,16 +27,18 @@ describe('Create user', () => {
   })
 
   it('should not be able to create a new user with an existing email', async () => {
-    const userData = {
-      name: 'test02',
-      email: 'test02@test.com',
-      password: '123123123',
-    }
+    await createUser.execute({
+      name: 'test_fail',
+      email: 'testfail@test.com',
+      password: '123123',
+    })
 
-    await createUser.execute(userData)
-
-    await expect(createUser.execute(userData)).rejects.toEqual(
-      Error('User already exists!')
-    )
+    await expect(
+      createUser.execute({
+        name: 'test_fail',
+        email: 'testfail@test.com',
+        password: '123123',
+      })
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

@@ -1,6 +1,6 @@
 import AppError from '@shared/infra/errors/AppError'
 
-import IUsersRepository from '../repositories/IUsersRepository'
+import { IUsersRepository } from '../repositories/IUsersRepository'
 
 import { User } from '../infra/typeorm/entities/User'
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
