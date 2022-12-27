@@ -21,7 +21,7 @@ export class CreateUserService {
     const userEmail = await this.usersRepository.findByEmail(email)
 
     if (userEmail) {
-      throw new AppError('User already exists!')
+      throw new AppError('User already exists!', 400)
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password)

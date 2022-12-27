@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express'
+import { NextFunction, Request, response, Response } from 'express'
 
 import { CreateUserService } from '@modules/users/services/CreateUserService'
 import UsersRepository from '../../typeorm/repositories/UsersRepository'
@@ -20,8 +20,10 @@ export class UsersController {
       })
 
       return res.status(201).json({ user })
-    } catch (err) {
-      next(err)
+    } catch ({ message }) {
+      res.status(400).json({
+        error: message,
+      })
     }
   }
 
