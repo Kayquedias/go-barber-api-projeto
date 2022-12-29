@@ -2,7 +2,7 @@ import { FakeUsersRepository } from '../repositories/fakes/FakeUsersRepository'
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 import AuthenticateUserService from './AuthenticateUserService'
-import AppError from '@shared/infra/errors/AppError'
+import AppError from '@shared/errors/AppError'
 
 let fakeUsersRepository: IUsersRepository
 let fakeHashProvider: FakeHashProvider

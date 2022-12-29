@@ -1,7 +1,6 @@
-import AppError from '@shared/infra/errors/AppError'
+import AppError from '@shared/errors/AppError'
+import { inject, injectable } from 'tsyringe'
 import { User } from '../infra/typeorm/entities/User'
-import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
-import HashProvider from '../providers/HashProvider/implementations/BCryptHashProvider'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
@@ -11,10 +10,14 @@ interface IRequest {
   password: string
 }
 
+@injectable()
 export class CreateUserService {
   constructor(
-    private usersRepository: IUsersRepository = new UsersRepository(),
-    private hashProvider: IHashProvider = new HashProvider()
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   async execute({ name, email, password }: IRequest): Promise<User> {

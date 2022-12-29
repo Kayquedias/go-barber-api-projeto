@@ -1,17 +1,15 @@
-import { NextFunction, Request, response, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
+import { container } from 'tsyringe'
 
 import { CreateUserService } from '@modules/users/services/CreateUserService'
 import UsersRepository from '../../typeorm/repositories/UsersRepository'
 
-export class UsersController {
-  async create(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | undefined> {
+export default class UsersController {
+  async create(req: Request, res: Response): Promise<Response | undefined> {
     try {
-      const createUserService = new CreateUserService()
       const { name, email, password } = req.body
+
+      const createUserService = container.resolve(CreateUserService)
 
       const user = await createUserService.execute({
         name,
@@ -33,7 +31,7 @@ export class UsersController {
     next: NextFunction
   ): Promise<Response | undefined> {
     try {
-      const usersRepository = new UsersRepository()
+      const usersRepository = container.resolve(UsersRepository)
       const users = await usersRepository.list()
 
       return res.status(200).json({ users })

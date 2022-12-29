@@ -1,4 +1,4 @@
-import AppError from '@shared/infra/errors/AppError'
+import AppError from '@shared/errors/AppError'
 import HashProvider from '../providers/HashProvider/fakes/FakeBCryptHashProvider'
 import { FakeUsersRepository } from '../repositories/fakes/FakeUsersRepository'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'

@@ -4,7 +4,7 @@ import { Router } from 'express'
 import uploadConfig from 'src/config/upload'
 import multer from 'multer'
 
-import { UsersController } from '../controllers/userController'
+import UsersController from '../controllers/UsersController'
 import UserAvatarController from '../controllers/UserAvatarController'
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated'
@@ -14,7 +14,7 @@ const usersController = new UsersController()
 const usersAvatarController = new UserAvatarController()
 const upload = multer(uploadConfig.multer)
 
-export default usersRouter.post(
+usersRouter.post(
   '/',
   celebrate({
     body: Joi.object({
@@ -34,3 +34,5 @@ usersRouter.patch(
 )
 
 usersRouter.get('/', usersController.list)
+
+export default usersRouter

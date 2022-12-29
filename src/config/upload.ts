@@ -5,20 +5,13 @@ import multer, { StorageEngine } from 'multer'
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp')
 
 interface IUploadConfig {
-  driver: 's3' | 'disk'
+  driver: 'disk'
 
   tmpFolder: string
   uploadsFolder: string
 
   multer: {
     storage: StorageEngine
-  }
-
-  config: {
-    disk: {}
-    aws: {
-      bucket: string
-    }
   }
 }
 
@@ -37,12 +30,5 @@ export default {
         return callback(null, fileName)
       },
     }),
-  },
-
-  config: {
-    disk: {},
-    aws: {
-      bucket: 'app-gobaber',
-    },
   },
 } as IUploadConfig

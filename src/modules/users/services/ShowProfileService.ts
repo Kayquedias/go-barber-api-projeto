@@ -1,4 +1,4 @@
-import AppError from '@shared/infra/errors/AppError'
+import AppError from '@shared/errors/AppError'
 
 import { IUsersRepository } from '../repositories/IUsersRepository'
 

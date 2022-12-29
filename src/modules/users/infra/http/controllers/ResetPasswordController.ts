@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import { container } from 'tsyringe'
 
 import ResetPasswordService from '@modules/users/services/ResetPasswordService'
 export default class ResetPasswordController {
@@ -10,7 +11,7 @@ export default class ResetPasswordController {
     try {
       const { password, token } = request.body
 
-      const resetPasswordService = new ResetPasswordService()
+      const resetPasswordService = container.resolve(ResetPasswordService)
 
       await resetPasswordService.execute({
         token,
