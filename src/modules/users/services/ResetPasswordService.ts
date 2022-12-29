@@ -2,14 +2,11 @@ import { addHours, isAfter } from 'date-fns'
 
 import AppError from '@shared/infra/errors/AppError'
 
-import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 
-import HashProvider from '../providers/HashProvider/implementations/BCryptHashProvider'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 
 import { IUsersTokensRepository } from '../repositories/IUsersTokenRepository'
-import UsersTokensRepository from '../infra/typeorm/repositories/UsersTokensRepository'
 
 import { injectable, inject } from 'tsyringe'
 

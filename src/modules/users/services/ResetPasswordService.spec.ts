@@ -44,6 +44,8 @@ describe('ResetPassword', () => {
 
     const updateUser = await fakeUsersRepository.findById(user.id)
 
+    console.log(updateUser?.password)
+
     expect(generateHash).toHaveBeenCalledWith('123123')
     expect(updateUser?.password).toBe('123123')
   })

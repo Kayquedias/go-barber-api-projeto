@@ -8,7 +8,7 @@ import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
 
 interface IRequest {
   user_id: string
-  avatarFilename: string
+  avatarFilename: string | undefined
 }
 
 export default class UpdateUserAvatarService {
