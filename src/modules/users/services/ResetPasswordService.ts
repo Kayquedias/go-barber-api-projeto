@@ -11,17 +11,25 @@ import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 import { IUsersTokensRepository } from '../repositories/IUsersTokenRepository'
 import UsersTokensRepository from '../infra/typeorm/repositories/UsersTokensRepository'
 
+import { injectable, inject } from 'tsyringe'
+
 interface IRequest {
   token: string
   password: string
 }
+
+@injectable()
 export default class ResetPasswordService {
-  private usersRepository: IUsersRepository = new UsersRepository()
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
 
-  private usersTokensRepository: IUsersTokensRepository =
-    new UsersTokensRepository()
+    @inject('UsersTokensRepository')
+    private usersTokensRepository: IUsersTokensRepository,
 
-  private hashProvider: IHashProvider = new HashProvider()
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
+  ) {}
 
   public async execute({ token, password }: IRequest): Promise<void> {
     const userToken = await this.usersTokensRepository.findByToken(token)

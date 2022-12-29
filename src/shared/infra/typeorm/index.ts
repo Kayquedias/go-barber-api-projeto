@@ -1,15 +1,13 @@
-import { createConnection, getConnectionOptions } from 'typeorm';
-
-(async (): Promise<void> => {
-  const options = await getConnectionOptions('default');
-  createConnection({ ...options, name: 'default' });
-})();
-console.log('Database Connection Established!!');
+import { createConnection, getConnectionOptions } from 'typeorm'
+;(async (): Promise<void> => {
+  const options = await getConnectionOptions('default')
+  createConnection({ ...options, name: 'default' })
+})()
+console.log('Database Connection Established!!')
 
 // createConnection()
 // console.log('Database Connection Established!!')
 
-    
 // async function init() {
 // let connection: Connection;
 // let queryRunner: QueryRunner;
@@ -21,7 +19,7 @@ console.log('Database Connection Established!!');
 //     connection = getConnection();
 //   }
 
-// queryRunner = connection.createQueryRunner(); 
-// }  
+// queryRunner = connection.createQueryRunner();
+// }
 
 // init()
