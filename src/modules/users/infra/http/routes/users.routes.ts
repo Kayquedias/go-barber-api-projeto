@@ -1,7 +1,7 @@
 import { celebrate, Joi } from 'celebrate'
 import { Router } from 'express'
 
-import uploadConfig from 'src/config/upload'
+import uploadConfig from 'config/upload'
 import multer from 'multer'
 
 import UsersController from '../controllers/UsersController'

@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
+    "rootDir": "./src",
     "paths": {
-      "@modules/*": ["./src/modules/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@modules/*": ["modules/*"],
+      "@shared/*": ["shared/*"]
     },
     "target": "ES6",
     "module": "commonjs",
