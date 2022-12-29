@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import uploadConfig from 'src/config/upload'
+import uploadConfig from 'config/upload'
 import IStorageProvider from '../models/IStorageProvider'
 
 export default class DiskStorageProvider implements IStorageProvider {
@@ -12,8 +12,8 @@ export default class DiskStorageProvider implements IStorageProvider {
     return file
   }
 
-  public async deleteFIle(filer: string): Promise<void> {
-    const filePath = path.resolve(uploadConfig.uploadsFolder, filer)
+  public async deleteFile(file: string): Promise<void> {
+    const filePath = path.resolve(uploadConfig.uploadsFolder, file)
     try {
       await fs.promises.stat(filePath)
     } catch (err) {

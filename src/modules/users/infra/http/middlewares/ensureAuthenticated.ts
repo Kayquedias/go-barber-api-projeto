@@ -1,8 +1,14 @@
-import { verify } from 'crypto'
+import { verify } from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 
 import AppError from '@shared/errors/AppError'
-import auth from 'src/config/auth'
+import auth from 'config/auth'
+
+interface ITokenPayload {
+  iat: number
+  exp: number
+  sub: string
+}
 
 export default function ensureAuthenticated(
   request: Request,
@@ -19,6 +25,12 @@ export default function ensureAuthenticated(
 
   try {
     const decoded = verify(token, auth.jwt.secret)
+
+    const { sub } = decoded as ITokenPayload
+
+    request.user = {
+      id: sub,
+    }
 
     next()
   } catch (err) {

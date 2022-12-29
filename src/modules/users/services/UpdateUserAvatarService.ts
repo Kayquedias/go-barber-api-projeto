@@ -8,7 +8,7 @@ import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
 
 interface IRequest {
   user_id: string
-  avatarFilename: string
+  avatarFilename: string | undefined
 }
 
 export default class UpdateUserAvatarService {
@@ -19,11 +19,11 @@ export default class UpdateUserAvatarService {
     const user = await this.usersRepository.findById(user_id)
 
     if (!user) {
-      throw new AppError('Only authenticated users can chance avaaer.', 401)
+      throw new AppError('Only authenticated users can change avatar.', 401)
     }
 
     if (user.avatar) {
-      await this.storageProvider.deleteFIle(user.avatar)
+      await this.storageProvider.deleteFile(user.avatar)
     }
 
     const fileName = await this.storageProvider.saveFile(avatarFilename)
