@@ -7,6 +7,7 @@ import { User } from '../infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError'
 
 import authConfig from '../../../config/auth'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   email: string
