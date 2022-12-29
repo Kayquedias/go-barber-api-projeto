@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { classToClass } from 'class-transfomer'
+
 import ShowProfileService from '@modules/users/services/ShowProfileService'
 
 export default class ProfileController {
@@ -8,6 +8,6 @@ export default class ProfileController {
     const showProfile = new ShowProfileService()
     const user = await showProfile.execute({ user_id })
 
-    return response.json(classToClass(user))
+    return response.json({ user })
   }
 }

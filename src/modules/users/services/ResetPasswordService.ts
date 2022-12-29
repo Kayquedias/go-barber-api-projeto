@@ -1,8 +1,13 @@
 import { addHours, isAfter } from 'date-fns'
 
 import AppError from '@shared/infra/errors/AppError'
+
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
 import { IUsersRepository } from '../repositories/IUsersRepository'
+
+import HashProvider from '../providers/HashProvider/implementations/BCryptHashProvider'
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
+
 import { IUsersTokensRepository } from '../repositories/IUsersTokenRepository'
 import UsersTokensRepository from '../infra/typeorm/repositories/UsersTokensRepository'
 
@@ -15,6 +20,8 @@ export default class ResetPasswordService {
 
   private usersTokensRepository: IUsersTokensRepository =
     new UsersTokensRepository()
+
+  private hashProvider: IHashProvider = new HashProvider()
 
   public async execute({ token, password }: IRequest): Promise<void> {
     const userToken = await this.usersTokensRepository.findByToken(token)
@@ -36,7 +43,7 @@ export default class ResetPasswordService {
       throw new AppError('Token expired')
     }
 
-    //user.password = await this.hashProvider.generateHash(password);
+    user.password = await this.hashProvider.generateHash(password)
 
     await this.usersRepository.save(user)
   }
