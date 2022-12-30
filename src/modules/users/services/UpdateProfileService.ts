@@ -1,10 +1,9 @@
 import AppError from '@shared/errors/AppError'
 import { IUsersRepository } from '../repositories/IUsersRepository'
-import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
-import HashProvider from '../providers/HashProvider/implementations/BCryptHashProvider'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
 
 import { User } from '@modules/users/infra/typeorm/entities/User'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   user_id: string
@@ -13,11 +12,14 @@ interface IRequest {
   old_password?: string
   password?: string
 }
-
+@injectable()
 export default class UpdateProfileService {
-  private usersRepository: IUsersRepository = new UsersRepository()
-
-  private hashProvider: IHashProvider = new HashProvider()
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
+  ) {}
 
   public async execute({
     user_id,

@@ -4,7 +4,8 @@
     "rootDir": "./src",
     "paths": {
       "@modules/*": ["modules/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@config/*": ["config/*"]
     },
     "target": "ES6",
     "module": "commonjs",

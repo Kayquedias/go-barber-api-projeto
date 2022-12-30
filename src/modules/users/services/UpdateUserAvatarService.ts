@@ -1,19 +1,23 @@
 import AppError from '@shared/errors/AppError'
 import { IUsersRepository } from '../repositories/IUsersRepository'
 import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider'
-import StorageProvider from '@shared/container/providers/StorageProvider/implementations/DiskStorageProvider'
 
 import { User } from '@modules/users/infra/typeorm/entities/User'
-import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   user_id: string
   avatarFilename: string | undefined
 }
-
+@injectable()
 export default class UpdateUserAvatarService {
-  private usersRepository: IUsersRepository = new UsersRepository()
-  private storageProvider: IStorageProvider = new StorageProvider()
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider
+  ) {}
 
   public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id)

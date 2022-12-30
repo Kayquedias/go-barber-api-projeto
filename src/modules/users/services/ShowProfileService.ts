@@ -4,13 +4,17 @@ import { IUsersRepository } from '../repositories/IUsersRepository'
 
 import { User } from '../infra/typeorm/entities/User'
 import UsersRepository from '../infra/typeorm/repositories/UsersRepository'
+import { injectable, inject } from 'tsyringe'
 
 interface IRequest {
   user_id: string
 }
-
+@injectable()
 export default class ShowProfileService {
-  private usersRepository: IUsersRepository = new UsersRepository()
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) {}
 
   public async execute({ user_id }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id)
