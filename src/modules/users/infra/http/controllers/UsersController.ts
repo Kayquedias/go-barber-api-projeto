@@ -3,6 +3,7 @@ import { container } from 'tsyringe'
 
 import { CreateUserService } from '@modules/users/services/CreateUserService'
 import UsersRepository from '../../typeorm/repositories/UsersRepository'
+import { instanceToPlain } from 'class-transformer'
 
 export default class UsersController {
   async create(req: Request, res: Response): Promise<Response | undefined> {
@@ -17,7 +18,7 @@ export default class UsersController {
         password,
       })
 
-      return res.status(201).json({ user })
+      return res.status(201).json(instanceToPlain(user))
     } catch ({ message }) {
       res.status(400).json({
         error: message,
@@ -34,7 +35,7 @@ export default class UsersController {
       const usersRepository = container.resolve(UsersRepository)
       const users = await usersRepository.list()
 
-      return res.status(200).json({ users })
+      return res.status(200).json(instanceToPlain(users))
     } catch (err) {
       next(err)
     }
