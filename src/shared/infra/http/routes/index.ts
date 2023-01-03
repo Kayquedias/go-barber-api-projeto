@@ -3,7 +3,6 @@ import { Router } from 'express'
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes'
 import usersRoutes from '@modules/users/infra/http/routes/users.routes'
 import passwordRouter from '@modules/users/infra/http/routes/password.routes'
-import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated'
 
 const routes = Router()
 
