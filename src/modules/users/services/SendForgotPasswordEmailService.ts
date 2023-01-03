@@ -48,8 +48,8 @@ class SendForgotPasswordEmailService {
       templateData: {
         file: pathToForgotPassword,
         variables: {
-          name: '',
-          link: '',
+          name: user.name,
+          link: `localhost:3333/reset-password?token=${token}`,
         },
       },
     })
