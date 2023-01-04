@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer'
+import { Exclude, Expose } from 'class-transformer'
 import {
   Column,
   CreateDateColumn,
@@ -27,9 +27,18 @@ export class User {
   })
   avatar: string
 
-  @CreateDateColumn({ name: 'created_At' })
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date
 
-  @UpdateDateColumn({ name: 'updated_At' })
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date
+
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    if (!this.avatar) {
+      return null
+    }
+
+    return `${process.env.APP_API_URL}/files/${this.avatar}`
+  }
 }
