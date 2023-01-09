@@ -8,7 +8,7 @@ import {
 } from 'typeorm'
 
 @Entity('users')
-export class User {
+class User {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -42,3 +42,5 @@ export class User {
     return `${process.env.APP_API_URL}/files/${this.avatar}`
   }
 }
+
+export default User

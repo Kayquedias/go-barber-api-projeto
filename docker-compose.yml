@@ -9,3 +9,15 @@ services:
       POSTGRES_DB: gobarberapi
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+  mongodb: 
+    image: 'mongo'
+    restart: always
+    container_name: mongodb
+    ports: 
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: gobarberapi
+  redis:
+    image: 'redis'
+    ports: 
+      - 6379:6379

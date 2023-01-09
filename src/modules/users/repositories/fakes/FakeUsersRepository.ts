@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto'
 
 import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
 import { IUsersRepository } from '../IUsersRepository'
-import { User } from '@modules/users/infra/typeorm/entities/User'
+import User from '@modules/users/infra/typeorm/entities/User'
 
 export class FakeUsersRepository implements IUsersRepository {
   private users: User[] = []
