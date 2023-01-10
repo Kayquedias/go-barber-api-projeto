@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto'
 import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
 import { IUsersRepository } from '../IUsersRepository'
 import User from '@modules/users/infra/typeorm/entities/User'
+import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO'
 
 export class FakeUsersRepository implements IUsersRepository {
   private users: User[] = []
@@ -14,6 +15,20 @@ export class FakeUsersRepository implements IUsersRepository {
     this.users.push(user)
 
     return user
+  }
+
+  async findAllProviders({
+    exceptUserId,
+  }: IFindAllProvidersDTO): Promise<User[]> {
+    let { users } = this
+
+    if (exceptUserId) {
+      users = users.filter(user => {
+        user.id !== exceptUserId
+      })
+    }
+
+    return users
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
