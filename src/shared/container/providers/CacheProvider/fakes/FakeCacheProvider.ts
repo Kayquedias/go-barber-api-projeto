@@ -5,14 +5,16 @@ interface ICacheData {
 export default class FakeCacheProvider {
   private cache: ICacheData = {}
 
-  async save(key: string, value: string): Promise<void> {
+  async save<T>(key: string, value: T): Promise<void> {
     this.cache[key] = JSON.stringify(value)
   }
 
   async recover<T>(key: string): Promise<T | null> {
     const data = this.cache[key]
 
-    if (!data) return null
+    if (!data) {
+      return null
+    }
 
     const parsedData = JSON.parse(data) as T
 
@@ -24,7 +26,9 @@ export default class FakeCacheProvider {
   }
 
   async invalidatePrefix(prefix: string): Promise<void> {
-    const keys = Object.keys(this.cache).filter(key => key.startsWith(prefix))
+    const keys = Object.keys(this.cache).filter(key =>
+      key.startsWith(`${prefix}`)
+    )
 
     keys.forEach(key => delete this.cache[key])
   }

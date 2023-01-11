@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe'
+import { instanceToPlain } from 'class-transformer'
 
 import User from '@modules/users/infra/typeorm/entities/User'
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository'
@@ -30,7 +31,7 @@ class ListProvidersService {
 
       await this.cacheProvider.save(
         `providers-list:${userId}`,
-        JSON.stringify(users) // USAR CLASS TRANSFORMER
+        instanceToPlain(users)
       )
     }
 

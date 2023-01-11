@@ -10,7 +10,7 @@ export default class RedisCacheProvider implements ICacheProvider {
     this.client = new Redis(cacheConfig.config.redis)
   }
 
-  async save(key: string, value: string): Promise<void> {
+  async save<T>(key: string, value: T): Promise<void> {
     await this.client.set(key, JSON.stringify(value))
   }
 

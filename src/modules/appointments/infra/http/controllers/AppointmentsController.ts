@@ -1,9 +1,14 @@
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService'
 import { NextFunction, Request, Response } from 'express'
 import { container } from 'tsyringe'
 
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService'
+
 class AppointmentsController {
-  async create(request: Request, response: Response, next: NextFunction) {
+  async create(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<Response | undefined> {
     try {
       const userId = request.user.id
       const { providerId, date } = request.body

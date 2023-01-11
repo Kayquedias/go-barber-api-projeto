@@ -22,7 +22,7 @@ class UsersRepository implements IUsersRepository {
   async findAllProviders({
     exceptUserId,
   }: IFindAllProvidersDTO): Promise<User[]> {
-    let users: User[] = []
+    let users: User[]
 
     if (exceptUserId) {
       users = await this.ormRepository.find({

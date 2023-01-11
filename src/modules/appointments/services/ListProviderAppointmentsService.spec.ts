@@ -39,8 +39,6 @@ describe('List Provider Appointments', () => {
       day: 23,
     })
 
-    console.log(appointments)
-
     expect(appointments).toEqual([appointment1, appointment2])
   })
 })

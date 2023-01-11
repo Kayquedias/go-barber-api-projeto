@@ -23,9 +23,7 @@ export class FakeUsersRepository implements IUsersRepository {
     let { users } = this
 
     if (exceptUserId) {
-      users = users.filter(user => {
-        user.id !== exceptUserId
-      })
+      users = users.filter(user => user.id !== exceptUserId)
     }
 
     return users

@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe'
+import { instanceToPlain } from 'class-transformer'
 
 import Appointment from '../infra/typeorm/entities/Appointment'
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
@@ -41,7 +42,7 @@ class ListProviderAppointmentsService {
         }
       )
 
-      await this.cacheProvider.save(cacheKey, JSON.stringify(appointments)) // USAR CLASS TRANSFORMER
+      await this.cacheProvider.save(cacheKey, instanceToPlain(appointments))
     }
 
     return appointments
