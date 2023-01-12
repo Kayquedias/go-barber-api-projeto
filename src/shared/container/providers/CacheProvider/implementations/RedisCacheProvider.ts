@@ -21,7 +21,7 @@ export default class RedisCacheProvider implements ICacheProvider {
       return null
     }
 
-    const parsedData = JSON.parse(data)
+    const parsedData = await JSON.parse(data)
 
     return parsedData
   }
