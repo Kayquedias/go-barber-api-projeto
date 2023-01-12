@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
+import { instanceToPlain } from 'class-transformer'
 
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService'
-import { instanceToPlain } from 'class-transformer'
 
 export default class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {

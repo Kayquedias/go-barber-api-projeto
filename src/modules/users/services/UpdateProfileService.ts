@@ -1,9 +1,9 @@
-import AppError from '@shared/errors/AppError'
+import { inject, injectable } from 'tsyringe'
+
 import { IUsersRepository } from '../repositories/IUsersRepository'
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider'
-
+import AppError from '@shared/errors/AppError'
 import User from '@modules/users/infra/typeorm/entities/User'
-import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   user_id: string

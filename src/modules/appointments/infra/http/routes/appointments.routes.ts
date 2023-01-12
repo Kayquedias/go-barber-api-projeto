@@ -1,5 +1,5 @@
-import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
+import { celebrate, Joi, Segments } from 'celebrate'
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated'
 

@@ -1,8 +1,8 @@
-import 'reflect-metadata'
-import 'dotenv/config'
-
 import express, { Request, Response, NextFunction } from 'express'
 import { errors } from 'celebrate'
+
+import 'reflect-metadata'
+import 'dotenv/config'
 
 import AppError from '../../errors/AppError'
 import routes from './routes'

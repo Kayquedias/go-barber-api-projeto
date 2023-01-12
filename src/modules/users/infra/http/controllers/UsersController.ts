@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 import { container } from 'tsyringe'
+import { instanceToPlain } from 'class-transformer'
 
 import { CreateUserService } from '@modules/users/services/CreateUserService'
 import UsersRepository from '../../typeorm/repositories/UsersRepository'
-import { instanceToPlain } from 'class-transformer'
 
 export default class UsersController {
   async create(req: Request, res: Response): Promise<Response | undefined> {

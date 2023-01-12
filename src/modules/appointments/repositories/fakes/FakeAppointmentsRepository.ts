@@ -1,11 +1,11 @@
 import { randomUUID } from 'crypto'
-import { getDate, getDay, getMonth, getYear, isEqual } from 'date-fns'
+import { getDate, getMonth, getYear, isEqual } from 'date-fns'
 
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment'
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO'
 import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO'
 import IAppointmentsRepository from '../IAppointmentsRepository'
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO'
+import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment'
 
 class FakeAppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = []

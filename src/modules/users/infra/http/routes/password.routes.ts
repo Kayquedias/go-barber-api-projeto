@@ -1,5 +1,4 @@
 import Router from 'express'
-
 import { celebrate, Joi, Segments } from 'celebrate'
 
 import ResetPasswordController from '@modules/users/infra/http/controllers/ResetPasswordController'
